@@ -14,21 +14,31 @@ public class MostCommonCharacter {
 
         char[] strArray = str.toCharArray();
         Map<Character, Integer> strMap = new HashMap<>();
+        char maxKey = Character.MIN_VALUE;
+        int maxValue = Integer.MIN_VALUE;
 
         for (char element : strArray) {
             Character key = Character.valueOf(element);
+            
             if (strMap.containsKey(key)) {
                 strMap.put(key, strMap.get(key) + 1);
             }
             else {
                 strMap.put(key, 1);
             }
+            
+            if (strMap.get(key) > maxValue) {
+                maxKey = key;
+                maxValue = strMap.get(key);
+            }
         }
 
-        Entry<Character, Integer> maxEntry = strMap.entrySet().stream()
-                                                .max((entry1, entry2) -> entry1.getValue() - entry2.getValue())
-                                                .get();        
+        return maxKey;
 
-        return maxEntry.getKey();
+        // Entry<Character, Integer> maxEntry = strMap.entrySet().stream()
+        //                                         .max((entry1, entry2) -> entry1.getValue() - entry2.getValue())
+        //                                         .get();        
+
+        // return maxEntry.getKey();
     }
 }
